@@ -18,11 +18,7 @@ defmodule AdventOfCode.Day2 do
     string
     |> String.codepoints()
     |> Enum.reduce(%{}, fn char, acc -> 
-      if Map.has_key?(acc, char) do
-        Map.put(acc, char, acc[char] + 1)
-      else
-        Map.put(acc, char, 1)
-      end
+      Map.update(acc, char, 1, & &1 + 1)
     end)
   end
 
