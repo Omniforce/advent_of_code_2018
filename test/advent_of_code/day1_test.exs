@@ -2,13 +2,11 @@ defmodule AdventOfCode.Day1Test do
   use ExUnit.Case, async: true
   alias AdventOfCode.Day1
 
-  @input [:code.priv_dir(:advent_of_code), "inputs", "day1.txt"] 
-    |> Path.join()
-    |> File.read!()
-    |> String.trim()
-    |> String.split("\n")
-    |> Enum.map(&String.to_integer/1)
-
+  @input [:code.priv_dir(:advent_of_code), "inputs", "day1.txt"]
+         |> Path.join()
+         |> File.read!()
+         |> String.split("\n", trim: true)
+         |> Enum.map(&String.to_integer/1)
 
   describe "part one" do
     test "examples" do

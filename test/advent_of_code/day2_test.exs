@@ -2,11 +2,10 @@ defmodule AdventOfCode.Day2Test do
   use ExUnit.Case, async: true
   alias AdventOfCode.Day2
 
-  @input [:code.priv_dir(:advent_of_code), "inputs", "day2.txt"] 
-    |> Path.join()
-    |> File.read!()
-    |> String.trim()
-    |> String.split("\n")
+  @input [:code.priv_dir(:advent_of_code), "inputs", "day2.txt"]
+         |> Path.join()
+         |> File.read!()
+         |> String.split("\n", trim: true)
 
   describe "part one - checksum" do
     test "example" do
@@ -41,7 +40,7 @@ defmodule AdventOfCode.Day2Test do
         wvxyz
         """
         |> String.split("\n")
-      
+
       assert Day2.common_letters(input) == "fgij"
     end
 

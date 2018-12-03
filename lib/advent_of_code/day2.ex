@@ -1,5 +1,4 @@
 defmodule AdventOfCode.Day2 do
-
   @doc "Part one"
   def checksum(input) do
     {double_count, triple_count} =
@@ -17,8 +16,8 @@ defmodule AdventOfCode.Day2 do
   defp char_count(string) do
     string
     |> String.codepoints()
-    |> Enum.reduce(%{}, fn char, acc -> 
-      Map.update(acc, char, 1, & &1 + 1)
+    |> Enum.reduce(%{}, fn char, acc ->
+      Map.update(acc, char, 1, &(&1 + 1))
     end)
   end
 
@@ -35,7 +34,7 @@ defmodule AdventOfCode.Day2 do
         end
       end)
       |> case do
-        nil -> {:cont, update_seen(seen, permutations)} 
+        nil -> {:cont, update_seen(seen, permutations)}
         found -> {:halt, found}
       end
     end)
@@ -45,8 +44,8 @@ defmodule AdventOfCode.Day2 do
     chars = String.codepoints(label)
     length = Enum.count(chars)
 
-    for i <- 0..length-1 do
-      {start, [_ | rest]} = Enum.split(chars, i) 
+    for i <- 0..(length - 1) do
+      {start, [_ | rest]} = Enum.split(chars, i)
       Enum.join(start ++ rest, "")
     end
   end
