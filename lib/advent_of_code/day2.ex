@@ -16,7 +16,7 @@ defmodule AdventOfCode.Day2 do
 
   defp char_count(string) do
     string
-    |> String.graphemes()
+    |> String.codepoints()
     |> Enum.reduce(%{}, fn char, acc -> 
       if Map.has_key?(acc, char) do
         Map.put(acc, char, acc[char] + 1)
@@ -26,6 +26,7 @@ defmodule AdventOfCode.Day2 do
     end)
   end
 
+  @doc "Part two"
   def common_letters(input) do
     Enum.reduce_while(input, MapSet.new([]), fn label, seen ->
       permutations = label_permutations(label)
@@ -45,7 +46,7 @@ defmodule AdventOfCode.Day2 do
   end
 
   defp label_permutations(label) do
-    chars = String.graphemes(label)
+    chars = String.codepoints(label)
     length = Enum.count(chars)
 
     for i <- 0..length-1 do
