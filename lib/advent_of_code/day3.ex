@@ -16,10 +16,12 @@ defmodule AdventOfCode.Day3 do
   end
 
   def parse_claim(claim) do
-    [<<"#", id::binary>> | rest] = String.split(claim, ["@", ",", ":", "x"], trim: true)
-    [left, top, w, h] = Enum.map(rest, &to_int/1)
+    [id, left, top, w, h] =
+      claim
+      |> String.split(["#", " @ ", ",", ": ", "x"], trim: true)
+      |> Enum.map(&String.to_integer/1)
 
-    %{id: to_int(id), margin_left: left, margin_top: top, width: w, height: h}
+    %{id: id, margin_left: left, margin_top: top, width: w, height: h}
   end
 
   def claim_to_coords(%{margin_left: left, margin_top: top, width: w, height: h}) do
@@ -28,18 +30,16 @@ defmodule AdventOfCode.Day3 do
         do: {x, y}
   end
 
-  defp to_int(string), do: String.trim(string) |> String.to_integer()
-
   def non_overlapping_claim(input) do
     claims =
-      Enum.map(input, fn claim -> 
+      Enum.map(input, fn claim ->
         claim = parse_claim(claim)
         coords = claim_to_coords(claim)
         {claim.id, MapSet.new(coords)}
       end)
 
-    Enum.reduce_while(claims, false, fn {subject_id, subject_coords}, _ -> 
-      Enum.reduce_while(claims, false, fn {test_id, test_coords}, acc -> 
+    Enum.reduce_while(claims, false, fn {subject_id, subject_coords}, _ ->
+      Enum.reduce_while(claims, false, fn {test_id, test_coords}, acc ->
         cond do
           subject_id == test_id && acc == subject_id ->
             {:cont, subject_id}
