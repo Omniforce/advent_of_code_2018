@@ -37,5 +37,4 @@ defmodule AdventOfCode.Day5 do
     end)
     |> Enum.min_by(fn {_, v} -> v end)
   end
-
 end
