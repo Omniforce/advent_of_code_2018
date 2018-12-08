@@ -2,7 +2,7 @@ defmodule AdventOfCode.Day4 do
   def part_one(input) do
     {id, %{sleeps: sleeps}} = most_minutes_slept(input)
     {min, _} = most_common_minute(sleeps)
-    id * min 
+    id * min
   end
 
   def part_two(input) do
@@ -14,6 +14,7 @@ defmodule AdventOfCode.Day4 do
         {guard, most_common_minute(sleeps)}
       end)
       |> Enum.max_by(fn {_guard, {_min, count}} -> count end)
+
     guard * min
   end
 

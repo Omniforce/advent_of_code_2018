@@ -1,5 +1,4 @@
 defmodule AdventOfCode.Day5 do
-
   def react(chars) do
     chars
     |> Enum.reduce([], &do_reaction/2)
@@ -8,6 +7,7 @@ defmodule AdventOfCode.Day5 do
   end
 
   defp do_reaction(char, []), do: [char]
+
   defp do_reaction(char, [next | rest] = acc) do
     if polar_opposites?(char, next) do
       rest
@@ -17,6 +17,7 @@ defmodule AdventOfCode.Day5 do
   end
 
   def polar_opposites?(a, a), do: false
+
   def polar_opposites?(<<left::utf8>>, <<right::utf8>>) do
     abs(left - right) == 32
   end
@@ -33,6 +34,7 @@ defmodule AdventOfCode.Day5 do
         end)
         |> react()
         |> String.length()
+
       Map.put(acc, remove, length)
     end)
     |> Enum.min_by(fn {_, v} -> v end)

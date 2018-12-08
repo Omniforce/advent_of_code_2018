@@ -7,7 +7,6 @@ defmodule AdventOfCode.Day5Test do
          |> File.read!()
          |> String.trim()
          |> String.split("", trim: true)
-        
 
   describe "part one" do
     test "react/1" do

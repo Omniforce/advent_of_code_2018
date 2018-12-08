@@ -10,14 +10,12 @@ defmodule AdventOfCode.Day4Test do
 
   describe "part one" do
     test "parse_entry/1" do
-      assert {{:begin, 10}, [1518, 11, 1, 0, 0]} = 
-        Day4.parse_entry("[1518-11-01 00:00] Guard #10 begins shift")
+      assert {{:begin, 10}, [1518, 11, 1, 0, 0]} =
+               Day4.parse_entry("[1518-11-01 00:00] Guard #10 begins shift")
 
-      assert {:sleep, [1518, 11, 1, 0, 5]} = 
-        Day4.parse_entry("[1518-11-01 00:05] falls asleep")
+      assert {:sleep, [1518, 11, 1, 0, 5]} = Day4.parse_entry("[1518-11-01 00:05] falls asleep")
 
-      assert {:wake, [1518, 11, 1, 0, 25]} = 
-        Day4.parse_entry("[1518-11-01 00:25] wakes up")
+      assert {:wake, [1518, 11, 1, 0, 25]} = Day4.parse_entry("[1518-11-01 00:25] wakes up")
     end
 
     test "most_minutes_slept/1" do
