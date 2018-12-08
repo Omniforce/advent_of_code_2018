@@ -23,10 +23,6 @@ defmodule AdventOfCode.Day6 do
 
   @doc """
   Generates a list of all potential coords within input coords.
-
-  ## Examples
-    # iex> AdventOfCode.Day6.full_grid([{1, 1}, {2, 2}], 2)
-    # [{0, 0}, {0, 1}, {0, 2}, {1, 0}, {1, 2}, {2, 0}, {2, 1}]
   """
   def full_grid(min_x, max_x, min_y, max_y) do
     for x <- min_x..max_x,
