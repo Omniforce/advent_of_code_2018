@@ -31,7 +31,7 @@ defmodule AdventOfCode.Day6 do
   end
 
   @doc ~S"""
-  Part one problem
+  Part one example
 
   # conflicts - 11
   # A - 1, 1 - 14
@@ -68,6 +68,27 @@ defmodule AdventOfCode.Day6 do
      {{1, 1}, 6}
   """
   def manhattan_distance({a, b} = subject, {c, d}), do: {subject, abs(a - c) + abs(b - d)}
+
+  @doc ~S"""
+  Part two example
+
+  ## Example
+    iex> AdventOfCode.Day6.safest_area_size("1, 1\n1, 6\n8, 3\n3, 4\n5, 5\n8, 9\n")
+    16
+  """
+  def safest_area_size(input, max_distance_sum \\ 32) do
+    coords = parse_input(input)
+    {{min_x, _}, {max_x, _}} = Enum.min_max_by(coords, &elem(&1, 0))
+    {{_, min_y}, {_, max_y}} = Enum.min_max_by(coords, &elem(&1, 1))
+
+    full_grid(min_x, max_x, min_y, max_y)
+    |> calculate_distance_from_each_coord(coords)
+    |> Enum.filter(fn {_coord, distances} ->
+      distance_sum = Enum.reduce(distances, 0, fn {_, distance}, acc -> distance + acc end)
+      distance_sum < max_distance_sum
+    end)
+    |> Enum.count()
+  end
 
   defp calculate_distance_from_each_coord(full_grid, coords) do
     Enum.reduce(full_grid, %{}, fn current, acc ->

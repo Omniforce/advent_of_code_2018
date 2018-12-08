@@ -10,4 +10,8 @@ defmodule AdventOfCode.Day6Test do
   test "problem one" do
     assert 2342 == Day6.largest_bounded_zone(@input)
   end
+
+  test "problem two" do
+    assert 43302 == Day6.safest_area_size(@input, 10_000)
+  end
 end
