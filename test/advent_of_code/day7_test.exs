@@ -6,41 +6,57 @@ defmodule AdventOfCode.Day7Test do
          |> Path.join()
          |> File.read!()
 
-
   describe "part one" do
-
     test "parse_input/1" do
-      input =
-        """
-        Step C must be finished before step A can begin.
-        Step C must be finished before step F can begin.
-        Step A must be finished before step B can begin.
-        """
+      input = """
+      Step C must be finished before step A can begin.
+      Step C must be finished before step F can begin.
+      Step A must be finished before step B can begin.
+      """
 
       assert [
-        {"A", "C"},
-        {"F", "C"},
-        {"B", "A"}
-      ] = Day7.parse_input(input)
+               {"A", "C"},
+               {"F", "C"},
+               {"B", "A"}
+             ] = Day7.parse_input(input)
     end
 
     test "example" do
-      input =
-        """
-        Step C must be finished before step A can begin.
-        Step C must be finished before step F can begin.
-        Step A must be finished before step B can begin.
-        Step A must be finished before step D can begin.
-        Step B must be finished before step E can begin.
-        Step D must be finished before step E can begin.
-        Step F must be finished before step E can begin.
-        """
+      input = """
+      Step C must be finished before step A can begin.
+      Step C must be finished before step F can begin.
+      Step A must be finished before step B can begin.
+      Step A must be finished before step D can begin.
+      Step B must be finished before step E can begin.
+      Step D must be finished before step E can begin.
+      Step F must be finished before step E can begin.
+      """
 
       assert "CABDFE" == Day7.correct_sequence(input)
     end
 
     test "problem" do
       assert "OKBNLPHCSVWAIRDGUZEFMXYTJQ" == Day7.correct_sequence(@input)
+    end
+  end
+
+  describe "part two" do
+    test "example" do
+      input = """
+      Step C must be finished before step A can begin.
+      Step C must be finished before step F can begin.
+      Step A must be finished before step B can begin.
+      Step A must be finished before step D can begin.
+      Step B must be finished before step E can begin.
+      Step D must be finished before step E can begin.
+      Step F must be finished before step E can begin.
+      """
+
+      assert 15 == Day7.total_time(input, 0, 2)
+    end
+
+    test "problem" do
+      assert 982 == Day7.total_time(@input)
     end
   end
 end
